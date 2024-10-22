@@ -1,6 +1,7 @@
 package fr.efrei.pokemon.Controller;
 
 import fr.efrei.pokemon.dto.CreateTrainer;
+import fr.efrei.pokemon.dto.UpdateFight;
 import fr.efrei.pokemon.model.Fight;
 import fr.efrei.pokemon.model.Pokemon;
 import fr.efrei.pokemon.model.Trainer;
@@ -35,12 +36,23 @@ public class FightController {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<Fight> findById(@PathVariable String id) {
+  @PatchMapping("/{id}")
+  public ResponseEntity<Fight> update(@PathVariable String id, @RequestBody UpdateFight fightBody) {
     Fight fight = fightService.findById(id);
     if (fight == null) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    fightService.update(id, fightBody);
     return new ResponseEntity<>(fight, HttpStatus.OK);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<?> delete(@PathVariable String id) {
+    Fight fight = fightService.findById(id);
+    if (fight == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    fightService.delete(id);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 }

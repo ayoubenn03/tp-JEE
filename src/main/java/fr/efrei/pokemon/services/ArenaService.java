@@ -27,7 +27,6 @@ public class ArenaService {
   }
 
   public void save(Arena arena) {
-    // INSERT INTO pokemon VALUES (:name, :level, :type);
     arenaRepository.save(arena);
   }
 

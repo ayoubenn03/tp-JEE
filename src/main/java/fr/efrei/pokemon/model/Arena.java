@@ -1,10 +1,9 @@
 package fr.efrei.pokemon.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Arena {
@@ -16,6 +15,9 @@ public class Arena {
   private String name;
 
   private String localisation;
+
+  @OneToMany
+  private List<Fight> fights;
 
   public String getName() {
     return name;
@@ -39,5 +41,13 @@ public class Arena {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public List<Fight> getFights() {
+    return fights;
+  }
+
+  public void setFights(List<Fight> fights) {
+    this.fights = fights;
   }
 }
